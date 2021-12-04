@@ -1,0 +1,16 @@
+node() {
+
+	properties([
+		pipelineTriggers([pollSCM('* * * * *')])
+	])
+	
+    stage('Poll for changes') {
+		//git branch: 'branch-to-be-defined', credentialsId: 'id-to-be-defined', url: 'url-to-be-defined'
+    }
+	
+	stage('Calling Job') {
+        echo "Calling specific job"
+		//build job:"to-be-defined"
+    }
+
+}
