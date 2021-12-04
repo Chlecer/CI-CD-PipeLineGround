@@ -1,2 +1,2 @@
 # pipelines
-Some Jenkins simple examples using pipelines (declarative or scripted) 
+Some simple examples using Jenkins pipelines (declarative or scripted) 
