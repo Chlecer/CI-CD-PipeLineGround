@@ -1,0 +1,21 @@
+pipeline {
+
+    agent { label 'slave-to-be-defined' }
+
+    stages {
+        stage('Git Stage') {
+            steps {
+                script {
+                    sshagent(credentials: ['cred-id-to-be-def']) {
+                        sh "git clone --recursive ssh://git@bitbucket-url/project-to-be-def.git"
+                        dir('project-to-be-def') {
+                            sh "git tag -a tag-to-be-def -m 'New release'"
+                            sh "git push --tags"
+                            sh "git push --delete origin tag-to-be-def"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
