@@ -1,0 +1,25 @@
+pipeline {
+    agent { label 'slave-to-be-defined' }
+
+    stages {
+		stage('Run parallel action') {
+			steps {
+				parallel(
+					a: {
+						echo "This is run a"
+					},
+					b: {
+						echo "This is run b"
+					}
+				)		
+			}
+		}
+    }
+	
+	post {
+		always {
+			echo "Cleaning the workspace"
+			cleanWs()
+		}
+    }
+}
