@@ -1,0 +1,15 @@
+pipeline {
+    agent { label 'slave-to-be-defined-with-node-and-npm' }
+
+    stages {
+        stage('Version') {
+            steps {
+				script {
+					sh "node --version"
+					sh "npm --version"
+				}
+            }
+        }
+    }
+	
+}
