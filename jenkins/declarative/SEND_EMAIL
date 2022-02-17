@@ -1,0 +1,19 @@
+pipeline {
+    agent { label 'slave-to-be-defined' }
+
+	stages {
+        stage('Hello') {
+            steps {
+				script {
+					echo 'Hello World'	
+					emailext (
+						mimeType: 'text/html',
+						subject: "subject text",
+						body: "details text",
+						to: 'mail@yourprovider.com'
+					)
+				}
+            }
+        }
+	}	
+}
