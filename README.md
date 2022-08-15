@@ -8,7 +8,7 @@ Some simple examples using Jenkins pipelines.
 The two syntaxes are not directly interchangeable, but an answer to a problem for one syntax flavor can usually be converted into the other. The underlying language of both is Groovy, a fully featured programming language independent of Jenkins.
 
 How to know the Groovy version that we are using when running our pipelines?
-Just go to to http(s)://my_jenkins_default_url/about and search for Apache Groovy at **Mavenized dependencies**
+Just go to to ${YOUR_JENKINS_URL}/about and search for Apache Groovy at **Mavenized dependencies**
 
 Supported links:
 [Declarative-vs-scripted-pipelines-Whats-the-difference](https://www.theserverside.com/answer/Declarative-vs-scripted-pipelines-Whats-the-difference)
