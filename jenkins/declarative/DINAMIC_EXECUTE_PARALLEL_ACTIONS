@@ -1,0 +1,29 @@
+pipeline {
+
+    agent { label 'label-with-one-or-more-machines-that-will-not-be-used-on-run-parallel-stage' }
+
+
+    stages {
+        stage('Run parallel') {
+            steps {
+				script {
+					def nodes = ['label-machine-1','label-machine-2']
+					def parallelStages = [:]
+					nodes.each { p ->
+                        parallelStages[p] = {
+                            node(p) {
+                                stage(p) {
+                                    sh("hostname")
+                                }
+                            }
+                        } 
+                    }
+
+                    parallel parallelStages
+				}					
+            }
+        }
+        
+    }	
+}
+
