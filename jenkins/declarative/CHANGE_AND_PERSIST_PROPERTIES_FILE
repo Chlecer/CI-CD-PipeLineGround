@@ -1,0 +1,33 @@
+pipeline {
+
+    agent {
+        label 'slave-to-be-defined'
+    }
+
+    stages {
+        stage('Persist') {
+            steps {
+                script {
+                    def envFilename = 'template.env'
+                    def props = [:]
+                    props["SOME_PROP_VERSION"] = "somevalue"
+                    def content = props.collect { entry -> entry.key + "=" + entry.value }.join('\n')
+                    writeFile file: envFilename, text: content
+                    def newProps = readProperties file: envFilename
+                    println "value is: ${newProps["SOME_PROP_VERSION"]}"
+                    if (newProps["SOME_PROP_VERSION"] == null) {
+                        println "Oh no! IS NULL!!"
+                    }
+
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Cleaning the workspace"
+            cleanWs()
+        }
+    }
+}
