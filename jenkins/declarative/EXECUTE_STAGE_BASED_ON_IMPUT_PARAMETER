@@ -1,0 +1,34 @@
+pipeline {
+
+    agent {
+        label "slave-label"
+    }
+
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Do deploy after build',)
+    }
+
+
+    stages {
+        
+        stage('DEPLOY') {
+            when {
+                // allow only defined branches responsible for releases
+                expression { return DEPLOY == 'true' }
+            }
+            steps {
+                script {
+                    echo "DEPLOY was true, and I have been executed!"
+
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Cleaning the workspace"
+            cleanWs()
+        }
+    }
+}
