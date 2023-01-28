@@ -1,0 +1,28 @@
+def branchName = "https://your-repo.git"
+pipeline {
+
+    agent {
+        label "${branchName.contains("repo") ? "slave-1" : "slave-2"}"
+    }
+
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Do deploy after build',)
+    }
+    
+    stages {
+        stage('Stage 1') {
+            steps {
+                script {
+                    echo "Stage 1"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Cleaning the workspace"
+            cleanWs()
+        }
+    }
+}
